@@ -1,0 +1,43 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const connectToDB = require("./db/db");
+const auth = require("./routes/auth.routes");
+const videos = require("./routes/videos.routes");
+// const addresses = require("./routes/addresses.routes");
+// const wishlist = require("./routes/wishlist.routes");
+// const cart = require("./routes/cart.routes");
+// const orders = require("./routes/orders.routes");
+const verifyAuthentication = require("./middlewares/verify-auth.middleware");
+const app = express();
+
+connectToDB(process.env.DB_URL);
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", async (req, res) => {
+  try {
+    res.status(200).json({
+      response: "Welcome to Protube API!",
+      message: "Data fetched successfully.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong.",
+    });
+  }
+});
+
+app.use("/auth", auth);
+app.use("/api/videos", videos);
+
+app.use(verifyAuthentication);
+
+// app.use("/api/addresses", addresses);
+// app.use("/api/wishlist", wishlist);
+// app.use("/api/cart", cart);
+// app.use("/api/orders", orders);
+
+const port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`Listening at port : ${port}`));
