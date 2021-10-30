@@ -26,7 +26,7 @@ A youtub clone app built using ReactJS, Material UI, Redux, react router etc
 
 ## Demo
 
-Live app link: https://protubehq.netlify.app/
+Live app link: https://protube.netlify.app/
 
 ## Run Locally
 
