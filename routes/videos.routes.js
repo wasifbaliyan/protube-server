@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).json({
       message: "Video fetched successfully.",
       response: {
-        product: foundVideo,
+        video: foundVideo,
       },
     });
   } catch (error) {
