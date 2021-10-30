@@ -27,10 +27,10 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.11"
   },
-  "engines": {
-    "node": "16.11.1"
-  },
   "devDependencies": {
     "nodemon": "^2.0.14"
+  },
+  "engines": {
+    "node": "16.13.0"
   }
 }
