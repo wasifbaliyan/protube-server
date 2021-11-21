@@ -8,6 +8,7 @@ const likes = require("./routes/likes.routes");
 const watchs = require("./routes/watchs.routes");
 const history = require("./routes/history.routes");
 const bookmarks = require("./routes/bookmarks.routes");
+const playlists = require("./routes/playlists.routes");
 const verifyAuthentication = require("./middlewares/verify-auth.middleware");
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/api/likes", likes);
 app.use("/api/watchs", watchs);
 app.use("/api/history", history);
 app.use("/api/bookmarks", bookmarks);
+app.use("/api/playlists", playlists);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening at port : ${port}`));
