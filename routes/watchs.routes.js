@@ -30,6 +30,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { id } = req.body;
+    const found = await Watch.findOne({ videoId: id });
+    if (found) {
+      return res.status(404).json({
+        message: "video already exists.",
+      });
+    }
     const newWatchedVideo = await new Watch({
       videoId: id,
       userId: req.user._id,
@@ -54,7 +60,7 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const foundVideo = await Watch.findByIdAndDelete(id);
+    const foundVideo = await Watch.findOneAndDelete({ videoId: id });
     if (!foundVideo) {
       return res.status(404).json({
         message: "No video found.",

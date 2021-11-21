@@ -30,6 +30,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { id } = req.body;
+    const found = await Like.findOne({ videoId: id });
+    if (found) {
+      return res.status(404).json({
+        message: "video already exists.",
+      });
+    }
     const newLikedVideo = await new Like({
       videoId: id,
       userId: req.user._id,
@@ -54,7 +60,7 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const foundVideo = await Like.findByIdAndDelete(id);
+    const foundVideo = await Like.findOneAndDelete({ videoId: id });
     if (!foundVideo) {
       return res.status(404).json({
         message: "No video found.",
