@@ -8,11 +8,10 @@ const playlistSchema = new Schema(
       required: true,
     },
     userId: { type: Schema.Types.ObjectId, ref: "User" },
-
     videos: [
       {
-        userId: { type: Schema.Types.ObjectId, ref: "User" },
-        videoId: { type: Schema.Types.ObjectId, ref: "Video" },
+        type: Schema.Types.ObjectId,
+        ref: "PlaylistVideo",
       },
     ],
   },

@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
 router.post("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const found = await History.findOne({ videoId: id });
+    const found = await History.findOne({ videoId: id, userId: req.user._id });
     if (found) {
       return res.status(404).json({
         message: "video already exists.",
