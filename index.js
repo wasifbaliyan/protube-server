@@ -4,10 +4,11 @@ require("dotenv").config();
 const connectToDB = require("./db/db");
 const auth = require("./routes/auth.routes");
 const videos = require("./routes/videos.routes");
-// const addresses = require("./routes/addresses.routes");
-// const wishlist = require("./routes/wishlist.routes");
-// const cart = require("./routes/cart.routes");
-// const orders = require("./routes/orders.routes");
+const likes = require("./routes/likes.routes");
+const watchs = require("./routes/watchs.routes");
+const history = require("./routes/history.routes");
+const bookmarks = require("./routes/bookmarks.routes");
+const playlists = require("./routes/playlists.routes");
 const verifyAuthentication = require("./middlewares/verify-auth.middleware");
 const app = express();
 
@@ -34,10 +35,11 @@ app.use("/api/videos", videos);
 
 app.use(verifyAuthentication);
 
-// app.use("/api/addresses", addresses);
-// app.use("/api/wishlist", wishlist);
-// app.use("/api/cart", cart);
-// app.use("/api/orders", orders);
+app.use("/api/likes", likes);
+app.use("/api/watchs", watchs);
+app.use("/api/history", history);
+app.use("/api/bookmarks", bookmarks);
+app.use("/api/playlists", playlists);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening at port : ${port}`));
