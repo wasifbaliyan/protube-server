@@ -60,7 +60,8 @@ router.post("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const foundVideo = await History.findOneAndDelete({ videoId: id });
+    const userId = req.user._id;
+    const foundVideo = await History.findOneAndDelete({ videoId: id, userId });
     if (!foundVideo) {
       return res.status(404).json({
         message: "No video found.",
